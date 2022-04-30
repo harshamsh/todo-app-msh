@@ -13,7 +13,10 @@ export default function TodoListItem(props) {
   useEffect(() => {
     // do something
     setTodoItem({ todo, working_on_it, id });
-  }, []);
+    // return () => {
+    //   setTodoItem(null);
+    // };
+  }, [props]);
 
   async function changeProgress() {
     try {
@@ -28,14 +31,14 @@ export default function TodoListItem(props) {
   }
   async function deleteTodo() {
     try {
-      db.collection("todos").doc(id).delete();
+      await db.collection("todos").doc(id).delete();
     } catch (err) {
       console.log(err);
     }
+    props.refresh();
   }
 
   async function updateToBackend(event) {
-    console.log("submit function called");
     // prevent page refresh on submission
     event.preventDefault();
     setLoading(true);
@@ -71,11 +74,11 @@ export default function TodoListItem(props) {
         /> */}
         <form onSubmit={updateToBackend} className="todo-item-text-container">
           <input value={todoItem?.todo} onChange={updateLocalState} key={id} />
-          <small>{todoItem?.working_on_it ? "Not done yet" : "Lesgoo!"}</small>
+          <small>{todoItem?.working_on_it ? "Not done yet" : "Completed!"}</small>
         </form>
       </ListItem>
       <Button onClick={changeProgress}>
-        {todoItem?.working_on_it ? "Done That" : "On it"}
+        {todoItem?.working_on_it ? "Mark Completed" : "Mark In Progress"}
       </Button>
       <Button onClick={deleteTodo}>DEL</Button>
       {loading ? <CircularProgress /> : null}

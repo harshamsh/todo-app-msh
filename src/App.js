@@ -40,6 +40,7 @@ function App() {
       fetchedTodos = sortByTimestamp(fetchedTodos);
       console.log(fetchedTodos);
       setTodos(fetchedTodos);
+      // window.location.reload();
     });
   }
 
@@ -61,6 +62,7 @@ function App() {
     });
     tdInputFunc("");
     getTodo();
+    window.location.reload()
   }
 
   return (
