@@ -62,7 +62,7 @@ function App() {
     });
     tdInputFunc("");
     getTodo();
-    window.location.reload()
+    
   }
 
   return (
