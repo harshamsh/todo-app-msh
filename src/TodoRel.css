@@ -1,0 +1,14 @@
+.todo-item-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-item-text-container input {
+    border: none;
+    outline: none;
+    font-size: 23px;
+    padding: 0;
+}
+.todo-item-text-container small {
+    padding-left: 3px;
+}
